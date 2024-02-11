@@ -1,22 +1,17 @@
 .main {
-  display: flex;
+  position: relative;
+  background: #0885ff;
+  /* display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6rem;
-  min-height: 100vh;
+  justify-content: flex-end;
+  align-items: center; */
+  padding: 1rem;
 }
 
-.description {
-  display: inherit;
-  justify-content: inherit;
-  align-items: inherit;
-  font-size: 0.85rem;
-  max-width: var(--max-width);
-  width: 100%;
-  z-index: 2;
-  font-family: var(--font-mono);
-}
+
+
+
+
 
 .description a {
   display: flex;

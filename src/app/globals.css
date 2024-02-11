@@ -1,9 +1,10 @@
 :root {
-  --max-width: 1100px;
+  --max-width: 1300px;
   --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
-    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
-    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+  --font-mono: Assistant, system-ui, ui-monospace, Menlo, Monaco,
+    "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono",
+    "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono",
+    "Courier New", monospace;
 
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -87,12 +88,6 @@ body {
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
 }
 
 a {
@@ -100,8 +95,35 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+::-webkit-scrollbar {
+  display: none;
+}
+
+textarea {
+  font-family: var(--font-mono);
+  position: absolute;
+  display: inline-block;
+  min-height: 1em;
+  backface-visibility: hidden;
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+  outline: 0px;
+  resize: none;
+  background: transparent;
+  overflow: hidden;
+  word-break: normal;
+  white-space: pre;
+  overflow-wrap: break-word;
+  box-sizing: content-box;
+  width: max-content;
+  height: max-content;
+  left: 397.723px;
+  top: 198.895px;
+  transform: translate(0px, 0px) scale(1) rotate(0deg);
+  text-align: left;
+  vertical-align: top;
+  color: rgb(30, 30, 30);
+  opacity: 0.5;
+  max-height: 501.105px;
 }

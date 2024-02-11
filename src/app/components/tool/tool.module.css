@@ -1,0 +1,102 @@
+
+.tool {
+  position: absolute;
+  left: 7.5rem;
+  right: 68.5rem;
+  top:2rem;
+  background:rgb(253, 253, 253);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: .5rem;
+  display: flex;
+  justify-content:space-between;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: center;
+  font-size: 0.85rem;
+  max-width: var(--max-width);
+  height: 10vh;
+  width: 80%;
+  z-index: 2;
+  font-family: var(--font-mono);
+  border-radius: var(--border-radius);
+  cursor:move;
+}
+
+.tool button{
+  font-family: var(--font-inter);
+  background:antiquewhite;
+  min-width: 3rem;
+  padding: 1rem;
+  border:transparent;
+  margin-right: 0rem;
+  margin-left: .8rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.tool button:hover{
+  background:rgba(32, 32, 32, 0.651);
+  color: antiquewhite;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.selectedBtn{
+  border-bottom: .2rem solid #0885ff !important;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+
+.moreTools{
+  height: max-content;
+  max-width: 650px;
+  width: fit-content;
+  overflow-x: scroll;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  box-shadow: none;
+}
+
+.moreTools div{
+  cursor: pointer;
+}
+
+.moreOptionsModel {
+  position: absolute;
+  padding: auto;
+  top: 3rem;
+  right: 2.5rem;
+  z-index: 2;
+  display: flex;
+  padding: 1rem;
+  border: none;
+  border-radius: var(--border-radius);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background:rgb(253, 253, 253);
+  flex-direction: column;
+  width: fit-content;
+  height: max-content;
+}
+
+.dividerVertical {
+  border-left: 1px solid #cacaca;
+  background: #fffdfd;
+  width: 1px;
+  height: 30px;
+  right: 250px;
+  top: 10px;
+  margin-right: 1rem;
+}
+
+.dividerHorizontal {
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+  border-top: 1px solid #cacaca;
+  background: #fffdfd;
+  width:100%;
+  height: 1px;
+  right: 250px;
+  top: 10px;
+}
