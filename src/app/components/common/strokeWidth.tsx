@@ -18,7 +18,7 @@ export default function StrokeWidth({ defaultVal, min, max, label, setValue }: P
 
   useEffect(() => {
     setValue(input)
-  }, [input])
+  }, [input, setValue])
 
   return (
     <div className={styles.options}>

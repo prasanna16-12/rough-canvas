@@ -100,30 +100,28 @@ a {
 }
 
 textarea {
+  line-height: 1.2;
   font-family: var(--font-mono);
   position: absolute;
   display: inline-block;
-  min-height: 1em;
+  min-height: 1rem;
   backface-visibility: hidden;
   margin: 0px;
   padding: 0px;
   border: 0px;
   outline: 0px;
   resize: none;
-  background: transparent;
+  background:transparent;
   overflow: hidden;
   word-break: normal;
   white-space: pre;
   overflow-wrap: break-word;
   box-sizing: content-box;
-  width: max-content;
-  height: max-content;
+  width: fit-content;
+  height: auto;
   left: 397.723px;
   top: 198.895px;
-  transform: translate(0px, 0px) scale(1) rotate(0deg);
+  /* transform: translate(0px, 0px) scale(1) rotate(0deg); */
   text-align: left;
-  vertical-align: top;
-  color: rgb(30, 30, 30);
-  opacity: 0.5;
-  max-height: 501.105px;
+  /* vertical-align: top; */
 }

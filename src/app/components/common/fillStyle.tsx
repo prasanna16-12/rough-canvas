@@ -27,12 +27,12 @@ export default function FillStyle({ defaultVal, label, setValue }: Props) {
 
       <div className={styles.optionValuePicker}>
         <div className={styles.paletes}>
-          <button className={fillStyle === FILL_STYLE.CROSS_HATCH ? styles.selectedBtn : undefined} onClick={() => setFillStyle(FILL_STYLE.CROSS_HATCH)}>{FillCrossHatchIcon}</button>
-          <button className={fillStyle === FILL_STYLE.DASHED ? styles.selectedBtn : undefined} onClick={() => setFillStyle(FILL_STYLE.DASHED)}>{FillDashedIcon}</button>
-          <button className={fillStyle === FILL_STYLE.DOTS ? styles.selectedBtn : undefined} onClick={() => setFillStyle(FILL_STYLE.DOTS)}>{FillDotsIcon}</button>
-          <button className={fillStyle === FILL_STYLE.HACHURE ||  fillStyle === undefined? styles.selectedBtn : undefined} onClick={() => setFillStyle(FILL_STYLE.HACHURE)}>{FillHachureIcon}</button>
-          <button className={fillStyle === FILL_STYLE.SOLID ? styles.selectedBtn : undefined} onClick={() => setFillStyle(FILL_STYLE.SOLID)}>{FillSolidIcon}</button>
-          <button className={fillStyle === FILL_STYLE.ZIGZAG ? styles.selectedBtn : undefined} onClick={() => setFillStyle(FILL_STYLE.ZIGZAG)}>{FillZigZagIcon}</button>
+          <button className={`${fillStyle === FILL_STYLE.CROSS_HATCH ? styles.selectedSsecondaryBtn : undefined} ${styles.button_secondary}`} onClick={() => setFillStyle(FILL_STYLE.CROSS_HATCH)}>{FillCrossHatchIcon}</button>
+          <button className={`${fillStyle === FILL_STYLE.DASHED ? styles.selectedSsecondaryBtn : undefined} ${styles.button_secondary}`} onClick={() => setFillStyle(FILL_STYLE.DASHED)}>{FillDashedIcon}</button>
+          <button className={`${fillStyle === FILL_STYLE.DOTS ? styles.selectedSsecondaryBtn : undefined} ${styles.button_secondary}`} onClick={() => setFillStyle(FILL_STYLE.DOTS)}>{FillDotsIcon}</button>
+          <button className={`${fillStyle === FILL_STYLE.HACHURE || fillStyle === undefined ? styles.selectedSsecondaryBtn : undefined} ${styles.button_secondary}`} onClick={() => setFillStyle(FILL_STYLE.HACHURE)}>{FillHachureIcon}</button>
+          <button className={`${fillStyle === FILL_STYLE.SOLID ? styles.selectedSsecondaryBtn : undefined} ${styles.button_secondary}`} onClick={() => setFillStyle(FILL_STYLE.SOLID)}>{FillSolidIcon}</button>
+          <button className={`${fillStyle === FILL_STYLE.ZIGZAG ? styles.selectedSsecondaryBtn : undefined} ${styles.button_secondary}`} onClick={() => setFillStyle(FILL_STYLE.ZIGZAG)}>{FillZigZagIcon}</button>
 
         </div>
       </div>

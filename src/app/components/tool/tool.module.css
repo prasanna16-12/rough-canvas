@@ -22,7 +22,16 @@
   cursor:move;
 }
 
-.tool button{
+.lefToolMenu {
+  overflow-x: scroll;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-right: 1rem;
+    padding-bottom: 0.5rem;
+}
+
+.button_primary{
   font-family: var(--font-inter);
   background:antiquewhite;
   min-width: 3rem;
@@ -35,7 +44,7 @@
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 
-.tool button:hover{
+.button_primary:hover{
   background:rgba(32, 32, 32, 0.651);
   color: antiquewhite;
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
@@ -43,7 +52,6 @@
 
 .selectedBtn{
   border-bottom: .2rem solid #0885ff !important;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 

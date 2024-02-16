@@ -30,7 +30,7 @@ export default function PencilTool({ options, setOptions }: Props) {
     setOptions((prevOpt: Options) => {
       return { ...prevOpt, strokeWidth: strokeWidth, roughness: sloppines, stroke: stroke, fill: fill, fillStyle: fillStyle, strokeLineDash: strokeStyle }
     })
-  }, [strokeWidth, sloppines, stroke, fill, fillStyle, strokeStyle])
+  }, [strokeWidth, sloppines, stroke, fill, fillStyle, strokeStyle, setOptions])
 
   return (
     <div className={styles.moreTools}>

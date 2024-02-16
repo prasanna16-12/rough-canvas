@@ -1,4 +1,4 @@
-.options{
+.options {
   margin-right: 0.5rem;
   display: flex;
   justify-content: space-between;
@@ -7,59 +7,87 @@
   flex-direction: column;
 }
 
-.options p{
+.options p {
   margin: 0;
   margin-bottom: 0.25rem;
-  font-size: .75rem;
+  font-size: 0.75rem;
   color: #1b1b1f;
   font-weight: 400;
   display: block;
 }
 
-.options .optionValuePicker{
+.options .optionValuePicker {
   /* height: rem; */
-  margin-top: .1rem;
-  margin-bottom: .2rem;
+  margin-top: 0.1rem;
+  margin-bottom: 0.2rem;
 }
 
-.options .optionValuePicker .paletes{
+.options .optionValuePicker .paletes {
   display: flex;
   flex-direction: row;
 }
 
-.paletes button{
+.button_secondary {
   width: 1.5rem !important;
   height: 1.5rem !important;
   font-family: var(--font-inter);
-  background:antiquewhite;
-  min-width: 1.5rem!important;
-  padding: .1rem!important;
-  border:transparent;
-  margin-right: .3rem !important;
-  margin-left:0 !important;
+  background: antiquewhite;
+  min-width: 1.5rem !important;
+  padding: 0.1rem !important;
+  border: transparent;
+  margin-right: 0.3rem !important;
+  margin-left: 0 !important;
   border-radius: 6px !important;
   cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px !important;
 }
 
-.paletes .selectedBtn{
-  border-bottom: .1rem solid #0885ff !important;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+.selectedSsecondaryBtn {
+  border-bottom: 0.1rem solid #0885ff !important;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
-
-.paletes div{
+.paletes ._div {
   width: 1.5rem !important;
   height: 1.5rem !important;
   font-family: var(--font-inter);
-  min-width: 1.5rem!important;
-  padding: .1rem!important;
-  margin-right: .3rem !important;
-  margin-left:0 !important;
+  min-width: 1.5rem !important;
+  padding: 0.1rem !important;
+  margin-right: 0.3rem !important;
+  margin-left: 0 !important;
   border-radius: 6px !important;
+  border: none;
   cursor: pointer;
 }
 
-.paletes .selectedDiv{
-  box-shadow: rgb(255 255 255) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
+.paletes .selectedDiv {
+  box-shadow: rgb(255 255 255) 0px 0px 0px 1px inset,
+    rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
+}
+
+.selectCustom_trigger {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  background-color: #fff0;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+
+}
+
+.selectCustom_trigger::after {
+  content: "▾";
+  position: absolute;
+  top: 0;
+  line-height: 1rem;
+  right: 1rem;
+}
+
+.selectCustom_trigger:hover {
+  border-color: blue;
 }

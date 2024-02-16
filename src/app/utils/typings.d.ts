@@ -27,3 +27,12 @@ export interface Options {
   fixedDecimalPlaceDigits?: number;
   fillShapeRoughnessGain?: number;
 }
+
+export interface TextOption{
+  fontFamily: string;
+  fontSize: number;
+  color: string;
+  textAlign: 'start' | 'end' | 'left' | 'right' | 'center';
+  bold: 'Bold' | '';
+  italic : 'Italic' | '';
+}

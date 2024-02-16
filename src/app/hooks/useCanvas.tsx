@@ -1,10 +1,11 @@
 "use client"
-import React, { RefObject, createElement, useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { CIRCLE_DEFAULT_OPTION, ERASER_DEFAULT_OPTION, LINE_DEFAULT_OPTION, MODE, PENCIL_DEFAULT_OPTION, RECTANGLE_DEFAULT_OPTION } from '../utils/constant';
+import React, { ChangeEvent, RefObject, createElement, useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { CIRCLE_DEFAULT_OPTION, COLORS, ERASER_DEFAULT_OPTION, FONTS, LINE_DEFAULT_OPTION, MODE, PENCIL_DEFAULT_OPTION, RECTANGLE_DEFAULT_OPTION, TEXT_OPTIONS } from '../utils/constant';
 import { RoughCanvas } from "roughjs/bin/canvas";
 import rough from "roughjs";
 import { Drawable, Options } from "roughjs/bin/core";
 import { calcAngleDegrees, getDistance } from "../utils/common";
+import { TextOption } from "../utils/typings";
 const CanvasContext = React.createContext({});
 
 export const CanvasProvider = ({ children }: any) => {
@@ -25,8 +26,7 @@ export const CanvasProvider = ({ children }: any) => {
   const [rectangleOption, setRectangleOption] = useState<Options>(RECTANGLE_DEFAULT_OPTION);
   const [lineOption, setLineOption] = useState<Options>(LINE_DEFAULT_OPTION);
   const [writing, setWriting] = useState<boolean>(false)
-
-
+  const [textOption, setTextOption] = useState<TextOption>(TEXT_OPTIONS);
 
   useEffect(() => {
     const textArea = textAreaRef.current;
@@ -44,17 +44,24 @@ export const CanvasProvider = ({ children }: any) => {
       elements.forEach((element) => {
         if (element.mode === MODE.TEXT) {
           drawText(element.x1, element.y1, element.roughElement)
+
         }
-        else{
+        else {
           roughCanvasRef.current.draw(element.roughElement)
+
         }
       });
     }
   }, [elements]);
 
+  const updateElement = (e: ChangeEvent<HTMLCanvasElement>) => {
+    console.log(e);
+
+  }
+
 
   const createElement = (x1: number, y1: number, x2: number, y2: number, prevElement: Drawable | null) => {
-    let roughElement: Drawable | null= null;
+    let roughElement: Drawable | null = null;
 
 
     if (mode === MODE.PENCIL || mode === MODE.ERASER) {
@@ -62,6 +69,15 @@ export const CanvasProvider = ({ children }: any) => {
         return [...prevState, [x2, y2]]
       })
       roughElement = generator.curve(points, mode === MODE.PENCIL ? pencilOption : eraserOption);
+      return {
+        x1, y1, x2, y2, mode, roughElement, bound: {
+          x1: null,
+          y1: null,
+          x2: null,
+          y2: null,
+        }
+      }
+
     }
 
     if (mode === MODE.LINE) {
@@ -72,6 +88,15 @@ export const CanvasProvider = ({ children }: any) => {
       else {
         roughElement = generator.line(x1, y1, x2, y2, lineOption);
       }
+      return {
+        x1, y1, x2, y2, mode, roughElement, bound: {
+          x1: null,
+          y1: null,
+          x2: null,
+          y2: null,
+        }
+      }
+
 
     }
 
@@ -80,26 +105,45 @@ export const CanvasProvider = ({ children }: any) => {
         let width = x2 - x1 > y2 - y1 ? x2 - x1 : y2 - y1;
         roughElement = generator.rectangle(x1, y1, width, width, rectangleOption);
       }
+
       else {
         roughElement = generator.rectangle(x1, y1, x2 - x1, y2 - y1, rectangleOption);
+      }
+      return {
+        x1, y1, x2, y2, mode, roughElement,
+        bound: {
+          x1: null,
+          y1: null,
+          x2: null,
+          y2: null,
+        }
+
       }
     }
 
     if (mode === MODE.CIRCLE) {
       if (keyPress === "ShiftLeft") {
-        let diameter = getDistance(x1, y1, x2, y2) * 2;
-        roughElement = generator.circle(x1, y1, diameter, circleOption);
+        let diameter = getDistance(x1, y1, x2, y2);
+        roughElement = generator.circle((x1 + x2) / 2, (y1 + y2) / 2, diameter, circleOption);
       }
       else {
-        roughElement = generator.ellipse(x1, y1, Math.abs(x2 - x1) * 2, Math.abs(y2 - y1) * 2, circleOption);
+        roughElement = generator.ellipse((x1 + x2) / 2, (y1 + y2) / 2, Math.abs(x2 - x1) * 2, Math.abs(y2 - y1) * 2, circleOption);
       }
+      return {
+        x1, y1, x2, y2, mode, roughElement, bound: {
+          x1: null,
+          y1: null,
+          x2: null,
+          y2: null,
+        }
+      }
+
+
     }
-    return { x1, y1, x2, y2, mode, roughElement }
   }
 
   const prepareCanvas = () => {
     const canvas: HTMLCanvasElement = canvasRef.current
-
     document.addEventListener('keydown', ((e: KeyboardEvent) => {
       //console.log(e);
       setKeyPress(e.code)
@@ -116,57 +160,116 @@ export const CanvasProvider = ({ children }: any) => {
 
     context?.scale(devicePixelRatio, devicePixelRatio);
     contextRef.current = context;
-    contextRef.current.font = "32px serif";
   };
 
-  const createTextElement = (text) =>{
+  const createTextElement = (text: string) => {
 
-    const {x, y} = canvasXY;
+    const { x, y } = canvasXY;
     const textMeasure = contextRef.current.measureText(text)
-    contextRef.current.strokeText(text, x, y);
     let options = {
-      text: text, 
-      font:"12px serif",
+      text: text,
+      font: `${textOption.italic} ${textOption.bold} ${textOption.fontSize}px  ${textOption.fontFamily}`,
+      textAlign: textOption.textAlign,
+      textBaseline: "top",
+      fillStyle: textOption.color,
       ...textMeasure
     }
 
-    return{
-      x1:x,
-      y1:y,
-      x2:null,
-      y2:null,
+    return {
+      x1: x,
+      y1: y,
+      x2: textAreaRef.current.style.width + x,
+      y2: textAreaRef.current.style.height + y,
       mode: MODE.TEXT,
-      roughElement: options
+      roughElement: options,
+      bound: {
+        x1: null,
+        y1: null,
+        x2: null,
+        y2: null,
+      }
+    }
+  }
+  const texthandleInput = (e: ChangeEvent<HTMLTextAreaElement>) => {
+
+    if (textAreaRef.current) {
+      textAreaRef.current.style.height = "auto";
+      textAreaRef.current.style.height = `${e.target.scrollHeight}px`;
+      textAreaRef.current.style.width = "auto";
+      textAreaRef.current.style.width = `${e.target.scrollWidth + 16}px`;
+
     }
   }
 
 
-  const textInputFocusChange = (e: Event) => {
-    console.log(textAreaRef.current);
-    
-    const element = createTextElement(e.target?.value)
+  const textInputFocusChange = (e: MouseEvent) => {
+
+    const id: string = (e.relatedTarget?.id);
+    if (['Font family', 'rangeInp', 'Color', 'expand', 'Text style'].includes(id)) {
+      textAreaRef.current.focus();
+      textAreaRef.current.style.height = "auto";
+      textAreaRef.current.style.width = "auto";
+      return;
+    }
+    const element = createTextElement(textAreaRef.current.value)
     setElements((prevState) => [...prevState, element]);
     setMode(MODE.PENCIL)
   }
 
-  const drawText = (x,y,options) => {
+  const drawText = (x: number, y: number, options: any) => {
 
     contextRef.current.font = options.font;
-    contextRef.current.strokeText(options.text, x * 2, y * 2);
+    contextRef.current.fillStyle = options.fillStyle;
+    contextRef.current.textAlign = options.textAlign;
+    contextRef.current.textBaseline = options.textBaseline;
+    const splitTexts = (options.text as string).split('\n');
+    const topOffset: number = 0; //Number.parseInt(options.font)/8;
+
+    let _y = y
+    splitTexts.forEach((text, i) => {
+      contextRef.current.fillText(text, x, _y + topOffset);
+      _y = _y + (textOption.fontSize * 1.2);
+    });
   }
 
   const mouseDown = ({ nativeEvent }: any) => {
-
     const { offsetX, offsetY } = nativeEvent;
+
+    if (mode === MODE.SELECT) {
+      console.log('mouse down at ', offsetX, offsetY);
+      for (let i = 0; i < elements.length; i++) {
+        const element = elements[i];
+        console.log(element);
+
+        // if (element.x1 < offsetX && offsetX < element.x2 && element.y1 < offsetY && offsetY < element.y2) {
+        //   //console.log(element);
+        //   return
+
+        // }
+        // const ops = element.roughElement.sets[0].ops;
+
+        // for (let j = 0; j < ops.length; j++) {
+        //   const data = ops[j];
+        //   console.log(data);
+
+        //   if(data[0] - 2 < offsetX < data[0] + 2 && data[1] - 2 < offsetY < data[1] + 2){
+        //     console.log('clicked on element ', data[0],data[1]);
+        //     return
+        //   }
+        // }
+
+      }
+      return
+    }
+
 
     if (mode === MODE.TEXT && !writing) {
       setCanvasXY({ x: offsetX, y: offsetY })
-      textAreaRef.current.focus();
       setWriting(true)
       return;
     }
     else if (mode === MODE.TEXT && writing) {
-      console.log(textAreaRef.current.value);
+      //console.log(textAreaRef.current.style);
       const element = createTextElement(textAreaRef.current.value)
       setElements((prevState) => [...prevState, element]);
       setMode(MODE.PENCIL)
@@ -180,11 +283,8 @@ export const CanvasProvider = ({ children }: any) => {
 
   };
 
-
-
   const mouseMove = ({ nativeEvent }: any) => {
     const { offsetX, offsetY } = nativeEvent;
-
     if (!isCursorMoving) {
       return;
     }
@@ -202,6 +302,56 @@ export const CanvasProvider = ({ children }: any) => {
 
   const mouseReleas = () => {
     setIsCursorMoving(false);
+    const index = elements.length - 1
+    let lastElement = elements[index]
+    //console.log(lastElement);
+    //elements.push(lastElement)
+    let minX = Number.POSITIVE_INFINITY;
+    let minY = Number.POSITIVE_INFINITY;
+
+    let maxX = Number.NEGATIVE_INFINITY;
+    let maxY = Number.NEGATIVE_INFINITY
+
+    for (let i = 0; i < lastElement.roughElement.sets.length; i++) {
+      const set = lastElement.roughElement.sets[i];
+      if (set.type === 'path') { 
+        for (let j = 0; j < set.ops.length; j++) {
+          const op = set.ops[j];
+          let x, y = 0;
+          
+          if(op.op === 'move'){
+            x = op.data[0]
+            y = op.data[1]
+          }
+          if(op.op === 'bcurveTo'){
+            x = op.data[4]
+            y = op.data[5]
+          }
+          minX = x > minX ? minX : x
+          minY = y > minY ? minY : y
+
+          maxX = x < maxX ? maxX : x
+          maxY = y < maxY ? maxY : y
+          
+        }
+      }
+      
+    }
+
+    const boundCords = {
+      x1: minX,
+      y1: minY,
+      x2: maxX,
+      y2: maxY,
+    };
+
+    lastElement.bound = boundCords;
+    console.log(lastElement);
+    elements.push(lastElement)
+
+    contextRef.current.beginPath();
+    contextRef.current.rect(boundCords.x1, boundCords.y1, boundCords.x2 - boundCords.x1, boundCords.y2 - boundCords.y1);
+    contextRef.current.stroke();
     if (mode === MODE.PENCIL || mode === MODE.ERASER) {
       setPoints([])
     }
@@ -253,9 +403,22 @@ export const CanvasProvider = ({ children }: any) => {
 
   const text = () => {
     setMode(MODE.TEXT)
-
+    canvasRef.current.style.cursor = 'text';
+    setCanvasXY({
+      x: 0, y: 0
+    })
 
   }
+
+  const select = () => {
+    setMode(MODE.SELECT)
+    canvasRef.current.style.cursor = 'crosshair';
+    setCanvasXY({
+      x: 0, y: 0
+    })
+
+  }
+
 
 
   return (
@@ -263,6 +426,7 @@ export const CanvasProvider = ({ children }: any) => {
       value={{
         canvasRef,
         textAreaRef,
+        texthandleInput,
         textInputFocusChange,
         canvasXY,
         contextRef,
@@ -274,6 +438,7 @@ export const CanvasProvider = ({ children }: any) => {
         pencil,
         mouseMove,
         text,
+        select,
         mode,
         line,
         rectangle,
@@ -292,7 +457,12 @@ export const CanvasProvider = ({ children }: any) => {
         eraserOption,
 
         setLineOption,
-        lineOption
+        lineOption,
+
+        textOption,
+        setTextOption,
+
+        updateElement
       }}
     >
       {children}

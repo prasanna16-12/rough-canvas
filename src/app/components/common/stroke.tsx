@@ -19,7 +19,7 @@ export default function Stroke({ defaultVal, label, setValue, isFillCompont}: Pr
 
   useEffect(() => {
     setValue(stroke)
-  }, [stroke])
+  }, [setValue, stroke])
 
   return (
     <div className={styles.options}>
@@ -28,13 +28,13 @@ export default function Stroke({ defaultVal, label, setValue, isFillCompont}: Pr
       <div className={styles.optionValuePicker}>
         <div className={styles.paletes}>
           {
-            isFillCompont ? <div style={{backgroundImage: `url(${img.src})`}} className={stroke === undefined ? styles.selectedDiv : undefined} onClick={() => setStroke(undefined)}></div> : null
+            isFillCompont ? <button id={label} style={{backgroundImage: `url(${img.src})`}} className={`${stroke === undefined ? styles.selectedDiv : undefined} ${styles._div}`} onClick={() => setStroke(undefined)}></button> : null
           }
-          <div style={{backgroundColor: COLORS.BLACK}} className={stroke === COLORS.BLACK ? styles.selectedDiv : undefined} onClick={() => setStroke(COLORS.BLACK)}></div>
-          <div style={{backgroundColor: COLORS.RED}} className={stroke === COLORS.RED ? styles.selectedDiv : undefined} onClick={() =>setStroke(COLORS.RED)}></div>
-          <div style={{backgroundColor: COLORS.BLUE}} className={stroke === COLORS.BLUE ? styles.selectedDiv : undefined} onClick={() =>setStroke(COLORS.BLUE)}></div>
-          <div style={{backgroundColor: COLORS.GREEN}} className={stroke === COLORS.GREEN ? styles.selectedDiv : undefined} onClick={() =>setStroke(COLORS.GREEN)}></div>
-          <div style={{backgroundColor: COLORS.LAVENDER}} className={stroke === COLORS.LAVENDER ? styles.selectedDiv : undefined} onClick={() =>setStroke(COLORS.LAVENDER)}></div>
+          <button id={label} style={{backgroundColor: COLORS.BLACK}} className={`${stroke === COLORS.BLACK ? styles.selectedDiv : undefined} ${styles._div}`}onClick={() => setStroke(COLORS.BLACK)}></button>
+          <button id={label} style={{backgroundColor: COLORS.RED}} className={`${stroke === COLORS.RED ? styles.selectedDiv : undefined} ${styles._div}`}onClick={() =>setStroke(COLORS.RED)}></button>
+          <button id={label} style={{backgroundColor: COLORS.BLUE}} className={`${stroke === COLORS.BLUE ? styles.selectedDiv : undefined} ${styles._div}`}onClick={() =>setStroke(COLORS.BLUE)}></button>
+          <button id={label} style={{backgroundColor: COLORS.GREEN}} className={`${stroke === COLORS.GREEN ? styles.selectedDiv : undefined} ${styles._div}`}onClick={() =>setStroke(COLORS.GREEN)}></button>
+          <button id={label} style={{backgroundColor: COLORS.LAVENDER}} className={`${stroke === COLORS.LAVENDER ? styles.selectedDiv : undefined} ${styles._div}`}onClick={() =>setStroke(COLORS.LAVENDER)}></button>
         
         </div>
       </div>

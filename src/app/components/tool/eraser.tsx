@@ -13,7 +13,7 @@ interface Props {
 }
 
 
-export default function ERASER({ options, setOptions }: Props) {
+export default function EraserTool({ options, setOptions }: Props) {
   const [strokeWidth, setStrokeWidth] = useState<number | undefined>(options.strokeWidth);
 
   const {
@@ -26,11 +26,12 @@ export default function ERASER({ options, setOptions }: Props) {
     setOptions((prevOpt: Options) => {
       return { ...prevOpt, strokeWidth: strokeWidth as number, }
     })
-  }, [strokeWidth])
+  }, [canvasRef, setOptions, strokeWidth])
 
   return (
     <div className={styles.moreTools}>
       <StrokeWidth defaultVal={strokeWidth as number} min={1} max={50} label="Stroke width" setValue={setStrokeWidth} />
+      <div className={styles.dividerVertical}></div>
     </div>
   );
 }
