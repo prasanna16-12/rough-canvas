@@ -12,8 +12,8 @@ import FillStyle from "../common/fillStyle";
 import StrokeStyle from "../common/strokeStyle";
 
 interface Props {
-  options: Options,
-  setOptions: (value: Options) => void
+  options: any,
+  setOptions: (value: any) => void
 }
 
 

@@ -8,20 +8,19 @@ import { useCanvas } from "@/app/hooks/useCanvas";
 import { getCursorImage } from "@/app/utils/cursor";
 
 interface Props {
-  options: Options,
-  setOptions: (value: Options) => void
+  options: any,
+  setOptions: (value: any) => void
 }
 
 
 export default function EraserTool({ options, setOptions }: Props) {
-  const [strokeWidth, setStrokeWidth] = useState<number | undefined>(options.strokeWidth);
+  const [strokeWidth, setStrokeWidth] = useState<number | undefined >(options?.strokeWidth);
 
   const {
     canvasRef
   }: any = useCanvas();
 
   useEffect(() => {
-    console.log(strokeWidth);
     canvasRef.current.style.cursor = `url(${getCursorImage(strokeWidth!)}) ${strokeWidth!} ${strokeWidth!}, auto`;
     setOptions((prevOpt: Options) => {
       return { ...prevOpt, strokeWidth: strokeWidth as number, }

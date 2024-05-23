@@ -4,7 +4,7 @@
 import styles from "./common.module.css";
 import { useEffect, useState } from "react";
 import { STROKE_STYLE_DASH, TEXT_STYLE } from "@/app/utils/constant";
-import { StrokeStyleDashedIcon, StrokeStyleDottedIcon, StrokeStyleSolidIcon } from "../icons/icon";
+// import { StrokeStyleDashedIcon, StrokeStyleDottedIcon, StrokeStyleSolidIcon } from "../../utils/icon.ts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBold, faItalic } from "@fortawesome/free-solid-svg-icons";
 

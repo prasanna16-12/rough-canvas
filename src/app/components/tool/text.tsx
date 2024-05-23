@@ -14,8 +14,8 @@ import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import TextStyle from "../common/textStyle";
 
 interface Props {
-  options: TextOption,
-  setOptions: (value: TextOption) => void
+  options: any,
+  setOptions: (value: any) => void
 }
 
 

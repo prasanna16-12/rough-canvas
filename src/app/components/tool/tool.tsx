@@ -19,7 +19,7 @@ export default function Tool() {
 
 
 
-  const mouseMove = (e: MouseEvent<HTMLDivElement>): void => {
+  const mouseMove = (e: any): void => {
 
     if (tool.current) {
       newPosX = startPosX - e.clientX;
@@ -114,7 +114,7 @@ export default function Tool() {
           </svg>
         </a>
 
-        <a href="https://github.com/prasanna16-12/path-finder">
+        <a href="https://github.com/prasanna16-12/rough-canvas">
           <svg style={{ cursor: 'pointer', marginLeft: '1rem' }} width="32" height="32" xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 640 512">
             <path

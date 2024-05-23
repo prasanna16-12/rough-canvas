@@ -4,8 +4,13 @@
 
 import styles from "./common.module.css";
 import { useEffect, useState } from "react";
-import { FillCrossHatchIcon, FillDashedIcon, FillDotsIcon, FillHachureIcon, FillSolidIcon, FillZigZagIcon, SloppinessArchitectIcon, SloppinessArtistIcon, SloppinessCartoonistIcon } from "../icons/icon";
 import { FILL_STYLE } from "@/app/utils/constant";
+import FillCrossHatchIcon from "../icons/fillCrossHatchIcon";
+import FillDashedIcon from "../icons/fillDashedIcon";
+import FillDotsIcon from "../icons/fillDotsIcon";
+import FillHachureIcon from "../icons/fillHachureIcon";
+import FillSolidIcon from "../icons/FillSolidIcon";
+import FillZigZagIcon from "../icons/fillZigZagIcon";
 
 
 interface Props {
@@ -28,12 +33,12 @@ export default function FillStyle({ defaultVal, label, setValue }: Props) {
 
       <div className={styles.optionValuePicker}>
         <div className={styles.paletes}>
-          <button className={`${fillStyle === FILL_STYLE.CROSS_HATCH ? styles.selectedSsecondaryBtn : undefined} ${styles.button_secondary}`} onClick={() => setFillStyle(FILL_STYLE.CROSS_HATCH)}>{FillCrossHatchIcon}</button>
-          <button className={`${fillStyle === FILL_STYLE.DASHED ? styles.selectedSsecondaryBtn : undefined} ${styles.button_secondary}`} onClick={() => setFillStyle(FILL_STYLE.DASHED)}>{FillDashedIcon}</button>
-          <button className={`${fillStyle === FILL_STYLE.DOTS ? styles.selectedSsecondaryBtn : undefined} ${styles.button_secondary}`} onClick={() => setFillStyle(FILL_STYLE.DOTS)}>{FillDotsIcon}</button>
-          <button className={`${fillStyle === FILL_STYLE.HACHURE || fillStyle === undefined ? styles.selectedSsecondaryBtn : undefined} ${styles.button_secondary}`} onClick={() => setFillStyle(FILL_STYLE.HACHURE)}>{FillHachureIcon}</button>
-          <button className={`${fillStyle === FILL_STYLE.SOLID ? styles.selectedSsecondaryBtn : undefined} ${styles.button_secondary}`} onClick={() => setFillStyle(FILL_STYLE.SOLID)}>{FillSolidIcon}</button>
-          <button className={`${fillStyle === FILL_STYLE.ZIGZAG ? styles.selectedSsecondaryBtn : undefined} ${styles.button_secondary}`} onClick={() => setFillStyle(FILL_STYLE.ZIGZAG)}>{FillZigZagIcon}</button>
+          <button className={`${fillStyle === FILL_STYLE.CROSS_HATCH ? styles.selectedSsecondaryBtn : undefined} ${styles.button_secondary}`} onClick={() => setFillStyle(FILL_STYLE.CROSS_HATCH)}>{FillCrossHatchIcon()}</button>
+          <button className={`${fillStyle === FILL_STYLE.DASHED ? styles.selectedSsecondaryBtn : undefined} ${styles.button_secondary}`} onClick={() => setFillStyle(FILL_STYLE.DASHED)}>{FillDashedIcon()}</button>
+          <button className={`${fillStyle === FILL_STYLE.DOTS ? styles.selectedSsecondaryBtn : undefined} ${styles.button_secondary}`} onClick={() => setFillStyle(FILL_STYLE.DOTS)}>{FillDotsIcon()}</button>
+          <button className={`${fillStyle === FILL_STYLE.HACHURE || fillStyle === undefined ? styles.selectedSsecondaryBtn : undefined} ${styles.button_secondary}`} onClick={() => setFillStyle(FILL_STYLE.HACHURE)}>{FillHachureIcon()}</button>
+          <button className={`${fillStyle === FILL_STYLE.SOLID ? styles.selectedSsecondaryBtn : undefined} ${styles.button_secondary}`} onClick={() => setFillStyle(FILL_STYLE.SOLID)}>{FillSolidIcon()}</button>
+          <button className={`${fillStyle === FILL_STYLE.ZIGZAG ? styles.selectedSsecondaryBtn : undefined} ${styles.button_secondary}`} onClick={() => setFillStyle(FILL_STYLE.ZIGZAG)}>{FillZigZagIcon()}</button>
 
         </div>
       </div>
