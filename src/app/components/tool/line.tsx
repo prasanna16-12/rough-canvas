@@ -51,16 +51,6 @@ export default function LineTool({ options, setOptions }: Props) {
       {
         moreOptions ?
           <div className={styles.moreOptionsModel}>
-            {/* <Stroke defaultVal={fill as string} label="Fill" setValue={setFill} isFillCompont={true} />
-            <div className={styles.dividerHorizontal}></div>
-            {
-              fill ?
-                <>
-                  <FillStyle defaultVal={fillStyle as string} label="Fill style" setValue={setFillStyle} />
-                  <div className={styles.dividerHorizontal}></div>
-                </>
-                : null
-            } */}
             <StrokeStyle defaultVal={strokeStyle as number[]} label={"Stroke style"} setValue={setStrokeStyle} />
           </div>
           : null

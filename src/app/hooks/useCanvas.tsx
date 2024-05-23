@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 import React, { ChangeEvent, RefObject, createElement, useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { CIRCLE_DEFAULT_OPTION, COLORS, ERASER_DEFAULT_OPTION, FONTS, LINE_DEFAULT_OPTION, MODE, PENCIL_DEFAULT_OPTION, RECTANGLE_DEFAULT_OPTION, TEXT_OPTIONS } from '../utils/constant';
@@ -204,7 +205,7 @@ export const CanvasProvider = ({ children }: any) => {
 
   const textInputFocusChange = (e: MouseEvent) => {
 
-    const id: string = (e.relatedTarget?.id);
+    const id: string = (e.relatedTarget as any).id;
     if (['Font family', 'rangeInp', 'Color', 'expand', 'Text style'].includes(id)) {
       textAreaRef.current.focus();
       textAreaRef.current.style.height = "auto";
@@ -235,32 +236,6 @@ export const CanvasProvider = ({ children }: any) => {
   const mouseDown = ({ nativeEvent }: any) => {
     const { offsetX, offsetY } = nativeEvent;
 
-    if (mode === MODE.SELECT) {
-      console.log('mouse down at ', offsetX, offsetY);
-      for (let i = 0; i < elements.length; i++) {
-        const element = elements[i];
-        console.log(element);
-
-        // if (element.x1 < offsetX && offsetX < element.x2 && element.y1 < offsetY && offsetY < element.y2) {
-        //   //console.log(element);
-        //   return
-
-        // }
-        // const ops = element.roughElement.sets[0].ops;
-
-        // for (let j = 0; j < ops.length; j++) {
-        //   const data = ops[j];
-        //   console.log(data);
-
-        //   if(data[0] - 2 < offsetX < data[0] + 2 && data[1] - 2 < offsetY < data[1] + 2){
-        //     console.log('clicked on element ', data[0],data[1]);
-        //     return
-        //   }
-        // }
-
-      }
-      return
-    }
 
 
     if (mode === MODE.TEXT && !writing) {
@@ -306,52 +281,7 @@ export const CanvasProvider = ({ children }: any) => {
     let lastElement = elements[index]
     //console.log(lastElement);
     //elements.push(lastElement)
-    let minX = Number.POSITIVE_INFINITY;
-    let minY = Number.POSITIVE_INFINITY;
 
-    let maxX = Number.NEGATIVE_INFINITY;
-    let maxY = Number.NEGATIVE_INFINITY
-
-    for (let i = 0; i < lastElement.roughElement.sets.length; i++) {
-      const set = lastElement.roughElement.sets[i];
-      if (set.type === 'path') { 
-        for (let j = 0; j < set.ops.length; j++) {
-          const op = set.ops[j];
-          let x, y = 0;
-          
-          if(op.op === 'move'){
-            x = op.data[0]
-            y = op.data[1]
-          }
-          if(op.op === 'bcurveTo'){
-            x = op.data[4]
-            y = op.data[5]
-          }
-          minX = x > minX ? minX : x
-          minY = y > minY ? minY : y
-
-          maxX = x < maxX ? maxX : x
-          maxY = y < maxY ? maxY : y
-          
-        }
-      }
-      
-    }
-
-    const boundCords = {
-      x1: minX,
-      y1: minY,
-      x2: maxX,
-      y2: maxY,
-    };
-
-    lastElement.bound = boundCords;
-    console.log(lastElement);
-    elements.push(lastElement)
-
-    contextRef.current.beginPath();
-    contextRef.current.rect(boundCords.x1, boundCords.y1, boundCords.x2 - boundCords.x1, boundCords.y2 - boundCords.y1);
-    contextRef.current.stroke();
     if (mode === MODE.PENCIL || mode === MODE.ERASER) {
       setPoints([])
     }
@@ -410,17 +340,6 @@ export const CanvasProvider = ({ children }: any) => {
 
   }
 
-  const select = () => {
-    setMode(MODE.SELECT)
-    canvasRef.current.style.cursor = 'crosshair';
-    setCanvasXY({
-      x: 0, y: 0
-    })
-
-  }
-
-
-
   return (
     <CanvasContext.Provider
       value={{
@@ -438,7 +357,6 @@ export const CanvasProvider = ({ children }: any) => {
         pencil,
         mouseMove,
         text,
-        select,
         mode,
         line,
         rectangle,

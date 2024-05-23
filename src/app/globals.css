@@ -91,6 +91,7 @@ body {
 }
 
 a {
+  padding-top: .5rem;
   color: inherit;
   text-decoration: none;
 }
